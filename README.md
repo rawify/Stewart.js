@@ -11,7 +11,7 @@
 
 The code can run headless, but to set up all parameters properly, a visualization of the platform can help a lot. To do so, we use p5.js and quaternion.js
 
-```
+```js
 <script src="p5.js"></script>
 <script src="quaternion.js"></script>
 <script src="stewart.js"></script>
@@ -53,6 +53,31 @@ var sketch = function(p) {
 new p5(sketch, 'canvas');
 </script>
 ```
+
+## Examples
+
+In the examples folder are use cases documented.
+
+### Default
+
+The default example can be controlled via key presses on letters from a-z on the keyboard. Not all letters have a function. Here is a list:
+
+- q: Skewed square
+- w: wobble
+- e: eight
+- r: rotate
+- t: tilt
+- y: lissajous
+- m: mouse control
+- g: Gamepad control, using Gamepad Web API
+- b: Simulation of breath
+- h: Helical animation
+
+
+### LeapMotion
+
+The hand tracking device LeapMotion can be read via JavaScript using the leapjs package. The example uses the LeapMotion to use the hand position and orienttion as input for the platform.
+
 
 
 ## Options
