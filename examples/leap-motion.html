@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Stewart Platform - Leap Motion</title>
+
+        <style type="text/css">
+
+            img {
+                position:fixed;
+                right:20px;
+                bottom:20px;
+                z-index:1000;
+                border:0px;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <script src="../node_modules/p5/lib/p5.min.js"></script>
+        <script src="../node_modules/quaternion/quaternion.min.js"></script>
+        <script src="../node_modules/bezier-js/bezier.js"></script>
+        <script src="../node_modules/leapjs/leap-0.6.4.min.js"></script>
+        <script src="../stewart.js"></script>
+
+        <div id="canvas" style="text-align: center"></div>
+
+        <p style="text-align: center">Press any key to re-calibrate</p>
+
+        <script>
+
+            var platform;
+            var translation = [0, 0, 0];
+            var firstTranslation = null;
+            var orientation = Quaternion.ONE;
+            var hands = null;
+
+            function drawHands(p, hands) {
+
+              if (!hands || hands.length === 0)
+                return;
+
+              p.push();
+
+              var hand = hands[0];
+
+              p.translate(hand.palmPosition[0], hand.palmPosition[2], hand.palmPosition[1]);
+              p.rotateZ(hand.yaw());
+              p.rotateX(-hand.pitch());
+              p.rotateY(-hand.roll());
+
+              p.box(50, 120, 20);
+
+              p.pop();
+            }
+
+            function setupPlatform() {
+
+              var rotation = {active: false, x: 0, y: 0, cx: 0, cy: 0};
+
+              var sketch = function(p) {
+
+                p.setup = function() {
+                  p.createCanvas(600, 600, p.WEBGL);
+
+                  p.camera(100.0, -290.0, (p.height / 2.0) / Math.tan(Math.PI / 6),
+                          0.0, 0.0, 0.0,
+                          0.0, 1.0, 0.0);
+
+                  platform = new Stewart;
+
+                  platform.initHexagonal({
+                    platformTurn: false
+                  });
+                };
+
+                p.draw = function() {
+
+                  p.background(255);
+
+                  p.push();
+
+                  p.translate(50, -70, 200);
+                  p.rotateX(Math.PI / 2 - rotation.y / 400); // Work in correct X-Y-Z plane
+                  p.rotateY(rotation.x / 400);
+
+                  //drawHands(p, hands);
+
+                  platform.update(translation, orientation);
+
+                  // Draw the updated platform
+                  platform.draw(p);
+
+                  // Send to servos
+                  // platform.getServoAngles();
+
+                  p.pop();
+                };
+              };
+              new p5(sketch, 'canvas');
+
+              document.getElementById("canvas").onmousedown = function(ev) {
+                rotation.cx = ev.pageX - rotation.x;
+                rotation.cy = ev.pageY - rotation.y;
+                rotation.active = true;
+              };
+              document.onmouseup = function() {
+                rotation.active = false;
+              };
+              document.onmousemove = function(ev) {
+                if (rotation.active) {
+                  rotation.x = ev.pageX - rotation.cx;
+                  rotation.y = ev.pageY - rotation.cy;
+                }
+              };
+            }
+
+            Leap.loop(function(frame) {
+
+              hands = frame.hands;
+
+              if (hands.length > 0) {
+                var hand = hands[0];
+
+                if (firstTranslation === null) {
+                  firstTranslation = hand.palmPosition;
+                }
+
+                if (Math.hypot(hand.palmPosition[0] - firstTranslation[0], hand.palmPosition[1] - firstTranslation[1], hand.palmPosition[2] - firstTranslation[2]) < 40) {
+                  translation[0] = hand.palmPosition[0] - firstTranslation[0];
+                  translation[2] = hand.palmPosition[1] - firstTranslation[1];
+                  translation[1] = hand.palmPosition[2] - firstTranslation[2];
+                  orientation = Quaternion.fromEuler(hand.yaw(), -hand.pitch(), -hand.roll());
+                }
+              }
+            });
+
+            window.onkeydown = function() {
+              // Recalibrate
+              firstTranslation = null;
+            };
+
+            window.onload = setupPlatform;
+
+        </script>
+
+        <a href="https://www.xarg.org/projects/"><img src="https://www.xarg.org/image/xarg-logo.png" alt="xarg open projects" /></a>
+    </body>
+</html>
