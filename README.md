@@ -60,7 +60,11 @@ In the examples folder are use cases documented.
 
 ### Default
 
-The default example can be controlled via key presses on letters from a-z on the keyboard. Not all letters have a function. Here is a list:
+The default example can be controlled via key presses on letters from a-z on the keyboard. Not all letters have a function. 
+
+![Stewart-Platform](https://github.com/infusion/Stewart/blob/master/res/stewart-platform-helix.png?raw=true "Stewart Platform Helix Plot")
+
+Here is a list:
 
 - q: Skewed square
 - w: wobble
