@@ -7,7 +7,7 @@
 
 ## Visualization
 
-![node-dhcp](https://github.com/infusion/Stewart/blob/master/res/stewart-platform.png?raw=true "Stewart Platform Visualization")
+![Stewart-Platform](https://github.com/infusion/Stewart/blob/master/res/stewart-platform.png?raw=true "Stewart Platform Visualization")
 
 The code can run headless, but to set up all parameters properly, a visualization of the platform can help a lot. To do so, we use p5.js and quaternion.js
 
