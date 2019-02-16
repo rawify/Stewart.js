@@ -73,6 +73,13 @@ The default example can be controlled via key presses on letters from a-z on the
 - b: Simulation of breath
 - h: Helical animation
 
+### SVG Plotter
+
+SVG paths are parsed and used for motion commads. This way SVG images can be plotted with a Stewart platform by attaching a pen:
+
+![Stewart-Platform](https://github.com/infusion/Stewart/blob/master/res/stewart-platform-github.png?raw=true "Stewart Platform Github Plot")
+
+
 
 ### LeapMotion
 
