@@ -1,0 +1,38 @@
+{
+    "name": "stewart",
+    "title": "stewart",
+    "version": "1.0.0",
+    "homepage": "http://www.xarg.org/paper/inverse-kinematics-of-a-stewart-platform/",
+    "bugs": "https://github.com/infusion/Stewart/issues",
+    "description": "A library to calculat the inverse kinematics of a Stewart Platform",
+    "keywords": [
+        "math",
+        "stewart platform",
+        "inverse",
+        "kinematics",
+        "animation",
+        "p5"
+    ],
+    "author": "Robert Eisele <robert@xarg.org> (http://www.xarg.org/)",
+    "main": "stewart.js",
+    "private": false,
+    "readmeFilename": "README.md",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "directories": {
+        "example": "examples"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/infusion/Stewart.git"
+    },
+    "engines": {
+        "node": "*"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "p5": "^0.7.3",
+        "quaternion": "^1.0.5"
+    }
+}
