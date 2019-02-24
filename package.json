@@ -4,7 +4,7 @@
     "version": "1.0.0",
     "homepage": "http://www.xarg.org/paper/inverse-kinematics-of-a-stewart-platform/",
     "bugs": "https://github.com/infusion/Stewart/issues",
-    "description": "A library to calculat the inverse kinematics of a Stewart Platform",
+    "description": "A library to calculate the inverse kinematics of a Stewart Platform",
     "keywords": [
         "math",
         "stewart platform",

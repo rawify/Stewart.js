@@ -699,23 +699,23 @@
         }
       }, /*
        perlin: (function() {
-
+       
        var xoff = 0;
        var yoff = 0;
-
-
+       
+       
        return {
        duration: 0,
        fn: function(none, p) {
-
+       
        var b = p.noise(xoff, xoff) * 2 * Math.PI;
-
+       
        this.translation[0] = Math.cos(-b) * 13;
        this.translation[1] = Math.sin(-b) * 13;
        this.translation[2] = 0;
        this.orientation = new Quaternion(-13, -Math.cos(b), Math.sin(b), 0).normalize();
-
-
+       
+       
        xoff += 0.0001;
        yoff += 0.0001;
        }
@@ -1103,9 +1103,10 @@
         p.translate(this.translation[0], this.translation[1], this.translation[2] + this.T0[2]);
 
         // Implements a toAxisAngle, p5.js does not allow to handle quaternions directly
-        var len = Math.sqrt(1 - this.orientation.w * this.orientation.w);
-        if (len > 0) // TODO??? mit einheitsquat
+        if (this.orientation.w < 1) {
+          var len = Math.sqrt(1 - this.orientation.w * this.orientation.w);
           p.rotate(2 * Math.acos(this.orientation.w), [this.orientation.x / len, this.orientation.y / len, this.orientation.z / len]);
+        }
 
         this.drawPlatformPlate.call(this, p);
 
