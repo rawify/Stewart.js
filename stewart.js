@@ -535,12 +535,13 @@
 
       var ot = this.translation.slice();
       var oo = this.orientation.clone();
+      var tw = oo.slerp(no);
 
       this.cur = {
         duration: time,
         pathVisible: false,
         fn: function(pct) {
-          this.orientation = no; // Quaternion.slerp(oo, no, pct)
+          this.orientation = tw(pct);
           this.translation = [
             ot[0] + pct * (nt[0] - ot[0]),
             ot[1] + pct * (nt[1] - ot[1]),
