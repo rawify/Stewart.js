@@ -1,5 +1,5 @@
 /**
- * @license Stewart.js v1.0.0 17/02/2019
+ * @license Stewart.js v1.0.1 17/02/2019
  * http://www.xarg.org/paper/inverse-kinematics-of-a-stewart-platform/
  *
  * Copyright (c) 2019, Robert Eisele (robert@xarg.org)
@@ -1190,12 +1190,12 @@
         qi[1] = translation[1] + o[1];
         qi[2] = translation[2] + o[2] + z;
 
-        li[0] = q[i][0] - Bi[0];
-        li[1] = q[i][1] - Bi[1];
-        li[2] = q[i][2] - Bi[2];
+        li[0] = qi[0] - Bi[0];
+        li[1] = qi[1] - Bi[1];
+        li[2] = qi[2] - Bi[2];
 
         var gk = li[0] * li[0] + li[1] * li[1] + li[2] * li[2] - rodLength * rodLength + hornLength * hornLength;
-        var ek = 2 * hornLength * l[2][2];
+        var ek = 2 * hornLength * li[2];
         var fk = 2 * hornLength * (this.cosBeta[i] * li[0] + this.sinBeta[i] * li[1]);
 
         var sqSum = ek * ek + fk * fk;
