@@ -32,9 +32,9 @@
     },
     "license": "MIT",
     "dependencies": {
-        "bezier-js": "^2.3.2",
-        "leapjs": "^0.6.4",
-        "p5": "^1.1.9",
-        "quaternion": "^1.0.5"
+        "bezier-js": "^6.1.0",
+        "leapjs": "^1.1.1",
+        "p5": "^1.4.1",
+        "quaternion": "^1.2.1"
     }
 }

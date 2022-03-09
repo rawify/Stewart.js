@@ -1103,11 +1103,7 @@
         // Platform plate
         p.translate(this.translation[0], this.translation[1], this.translation[2] + this.T0[2]);
 
-        // Implements a toAxisAngle, p5.js does not allow to handle quaternions directly
-        if (this.orientation.w < 1) {
-          var len = Math.sqrt(1 - this.orientation.w * this.orientation.w);
-          p.rotate(2 * Math.acos(this.orientation.w), [this.orientation.x / len, this.orientation.y / len, this.orientation.z / len]);
-        }
+        p.applyMatrix.apply(p, this.orientation.conjugate().toMatrix4());
 
         this.drawPlatformPlate.call(this, p);
 
