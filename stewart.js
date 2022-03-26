@@ -66,7 +66,7 @@
             cur.y = y;
           }
 
-          segments.push({cmd: "move", x: x, y: y});
+          segments.push({cmd: "move", x: cur.x, y: cur.y});
 
           // Reset start position
           start = {x: cur.x, y: cur.y};
