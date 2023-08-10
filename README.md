@@ -117,11 +117,11 @@ A boolean if the servo range should be visible in the drawing. Default=false
 
 ### baseRadius + baseRadiusOuter
 
-When a hexagonal stewart platform is used, the `baseRadiusOuter` is used to draw the base plate in accordance to the [description](https://www.xarg.org/paper/inverse-kinematics-of-a-stewart-platform/).
+When a hexagonal stewart platform is used, the `baseRadiusOuter` is used to draw the base plate in accordance to the [description]([https://www.xarg.org/paper/inverse-kinematics-of-a-stewart-platform/](https://raw.org/research/inverse-kinematics-of-a-stewart-platform/)).
 
 ### platformRadius + platformRadiusOuter
 
-When a hexagonal stewart platform is used, the `platformRadiusOuter` is used to draw the platform plate in accordance to the [description](https://www.xarg.org/paper/inverse-kinematics-of-a-stewart-platform/).
+When a hexagonal stewart platform is used, the `platformRadiusOuter` is used to draw the platform plate in accordance to the [description]([https://www.xarg.org/paper/inverse-kinematics-of-a-stewart-platform/](https://raw.org/research/inverse-kinematics-of-a-stewart-platform/)).
 
 ### shaftDistance + ankerDistance
 
@@ -146,5 +146,5 @@ npm install stewart
 
 Copyright and licensing
 ===
-Copyright (c) 2019, [Robert Eisele](https://www.xarg.org/)
+Copyright (c) 2019, [Robert Eisele](https://raw.org/)
 Dual licensed under the MIT or GPL Version 2 licenses.
