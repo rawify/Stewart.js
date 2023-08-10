@@ -2,7 +2,7 @@
  * @license Stewart.js v1.0.1 17/02/2019
  * https://raw.org/research/inverse-kinematics-of-a-stewart-platform/
  *
- * Copyright (c) 2019, Robert Eisele (robert@xarg.org)
+ * Copyright (c) 2019, Robert Eisele (robert@raw.org)
  * Dual licensed under the MIT or GPL Version 2 licenses.
  **/
 
