@@ -1,7 +1,7 @@
 {
     "name": "stewart",
     "title": "stewart",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "homepage": "https://raw.org/research/inverse-kinematics-of-a-stewart-platform/",
     "bugs": "https://github.com/rawify/Stewart/issues",
     "description": "A library to calculate the inverse kinematics of a Stewart Platform",
