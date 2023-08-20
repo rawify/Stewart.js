@@ -7,7 +7,7 @@
 
 ## Visualization
 
-![Stewart-Platform](https://github.com/infusion/Stewart/blob/master/res/stewart-platform.png?raw=true "Stewart Platform Visualization")
+![Stewart-Platform](https://github.com/rawify/Stewart.js/blob/master/res/stewart-platform.png?raw=true "Stewart Platform Visualization")
 
 The code can run headless, but to set up all parameters properly, a visualization of the platform can help a lot. To do so, we use p5.js and quaternion.js
 
@@ -62,7 +62,7 @@ In the examples folder are use cases documented.
 
 The default example can be controlled via key presses on letters from a-z on the keyboard. Not all letters have a function. 
 
-![Stewart-Platform](https://github.com/infusion/Stewart/blob/master/res/stewart-platform-helix.png?raw=true "Stewart Platform Helix Plot")
+![Stewart-Platform](https://github.com/rawify/Stewart.js/blob/master/res/stewart-platform-helix.png?raw=true "Stewart Platform Helix Plot")
 
 Here is a list:
 
@@ -81,7 +81,7 @@ Here is a list:
 
 SVG paths are parsed and used for motion commads. This way SVG images can be plotted with a Stewart platform by attaching a pen:
 
-![Stewart-Platform](https://github.com/infusion/Stewart/blob/master/res/stewart-platform-github.png?raw=true "Stewart Platform Github Plot")
+![Stewart-Platform](https://github.com/rawify/Stewart.js/blob/master/res/stewart-platform-github.png?raw=true "Stewart Platform Github Plot")
 
 
 
@@ -146,5 +146,5 @@ npm install stewart
 
 Copyright and licensing
 ===
-Copyright (c) 2019, [Robert Eisele](https://raw.org/)
-Dual licensed under the MIT or GPL Version 2 licenses.
+Copyright (c) 2023, [Robert Eisele](https://raw.org/)
+Licensed under the MIT license.
