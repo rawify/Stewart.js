@@ -1,7 +1,8 @@
 # Stewart Platform
 
-[![NPM Package](https://nodei.co/npm-dl/stewart.png?months=6&height=1)](https://npmjs.org/package/stewart)
+[![NPM Package](https://img.shields.io/npm/v/stewart.svg?style=flat)](https://npmjs.org/package/stewart "View this project on npm")
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+
 
 [Stewart Platforms](https://raw.org/research/inverse-kinematics-of-a-stewart-platform/) are used for motion platforms with six dimensions of freedom. With this library you can simulate Stewart Platforms as well as use the calculated angles to drive a real platform.
 
