@@ -1,147 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"><title>Stewart Platform</title>
 
-        <style type="text/css">
+<head>
+  <meta charset="utf-8">
+  <title>Stewart Platform</title>
 
-            img {
-                position:fixed;
-                right:20px;
-                bottom:20px;
-                z-index:1000;
-                border:0px;
-            }
+  <style type="text/css">
+    img {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1000;
+      border: 0px;
+    }
+  </style>
+</head>
 
-        </style>
-    </head>
-    <body>
+<body>
 
-        <script src ="../node_modules/p5/lib/p5.min.js"></script>
-        <script src ="../node_modules/quaternion/quaternion.min.js"></script>
-        <script src ="../node_modules/bezier-js/bezier.js"></script>
-        <script src ="../stewart.js"></script>
-        <script src="https://unpkg.com/p5.gif@1.0.5/dist/p5gif.min.js"></script>
+  <script src="../node_modules/p5/lib/p5.min.js"></script>
+  <script src="../node_modules/quaternion/dist/quaternion.min.js"></script>
+  <script src="../node_modules/bezier-js/bezier.js"></script>
+  <script src="../dist/stewart.min.js"></script>
+  <script src="https://unpkg.com/p5.gif@1.0.5/dist/p5gif.min.js"></script>
 
-        <script>
-            
-            // Optimize image after download
-            // # convert default.gif -flip -crop 730x800+260+150 +repage -resize 50% -coalesce -deconstruct new.gif
-            
-            // Start recording by pressing R
-            
-            var animation;
-            var platform;
-            var recorder;
+  <script>
 
-            var startRecordingAtBegin = false;
-            var recording = false;
+    // Optimize image after download
+    // # convert default.gif -flip -crop 730x800+260+150 +repage -resize 50% -coalesce -deconstruct new.gif
 
-            var rotation = {active: false, x: 0, y: 0, cx: 0, cy: 0};
+    // Start recording by pressing R
 
-            // Overwrite start method temporarily
-            var start = Animation.prototype.start;
-            Animation.prototype.start = function(t) {
-                
-              if (!recording) {
-                recording = startRecordingAtBegin;
-              } else {
-                recorder.download();
-                startRecordingAtBegin = false;
-                recording = false;
-              }
-              // Run original function
-              start.call(this, t);
-            };
+    var animation;
+    var platform;
+    var recorder;
 
+    var startRecordingAtBegin = false;
+    var recording = false;
 
-            var setup = function() {
-              createCanvas(600, 600, WEBGL);
+    var rotation = { active: false, x: 0, y: 0, cx: 0, cy: 0 };
 
-              camera(100.0, -290.0, (height / 2.0) / Math.tan(Math.PI / 6),
-                      0.0, 0.0, 0.0,
-                      0.0, 1.0, 0.0);
+    // Overwrite start method temporarily
+    var start = Animation.prototype.start;
+    Animation.prototype.start = function (t) {
 
-              platform = new Stewart;
-              animation = new Animation(platform);
-
-              platform.initHexagonal();
-
-              recorder = p5Gif.capture({
-                top: 0,
-                left: 0,
-                width: -1,
-                height: -1,
-                framerate: 10,
-                repeat: true,
-                webgl: true
-              });
+      if (!recording) {
+        recording = startRecordingAtBegin;
+      } else {
+        recorder.download();
+        startRecordingAtBegin = false;
+        recording = false;
+      }
+      // Run original function
+      start.call(this, t);
+    };
 
 
-              document.getElementById("defaultCanvas0").onmousedown = function(ev) {
-                rotation.cx = ev.pageX - rotation.x;
-                rotation.cy = ev.pageY - rotation.y;
-                rotation.active = true;
-              };
-              document.onmouseup = function() {
-                rotation.active = false;
-              };
-              document.onmousemove = function(ev) {
-                if (rotation.active) {
-                  rotation.x = ev.pageX - rotation.cx;
-                  rotation.y = ev.pageY - rotation.cy;
-                }
-              };
-              document.onkeydown = function(e) {
+    var setup = function () {
+      createCanvas(600, 600, WEBGL);
 
-                var key = String.fromCharCode(e.keyCode | 32);
+      camera(100.0, -290.0, (height / 2.0) / Math.tan(Math.PI / 6),
+        0.0, 0.0, 0.0,
+        0.0, 1.0, 0.0);
 
-                if (key === 'r') {
-                  startRecordingAtBegin = true;
-                  return;
-                }
+      platform = new Stewart;
+      animation = new Animation(platform);
 
-                if (e.keyCode === 32) {
-                  animation.toggleVisiblePath();
-                  e.preventDefault();
-                  return;
-                }
-                animation.start(key);
-                //animation.moveTo([0,0,120], Quaternion.ONE, 1000, null);
-              };
-            };
+      platform.initHexagonal();
 
-            var draw = function() {
+      recorder = p5Gif.capture({
+        top: 0,
+        left: 0,
+        width: -1,
+        height: -1,
+        framerate: 10,
+        repeat: true,
+        webgl: true
+      });
 
-              background(255);
 
-              push();
+      document.getElementById("defaultCanvas0").onmousedown = function (ev) {
+        rotation.cx = ev.pageX - rotation.x;
+        rotation.cy = ev.pageY - rotation.y;
+        rotation.active = true;
+      };
+      document.onmouseup = function () {
+        rotation.active = false;
+      };
+      document.onmousemove = function (ev) {
+        if (rotation.active) {
+          rotation.x = ev.pageX - rotation.cx;
+          rotation.y = ev.pageY - rotation.cy;
+        }
+      };
+      document.onkeydown = function (e) {
 
-              translate(50, -70, 200);
-              rotateX(Math.PI / 2 - rotation.y / 400); // Work in correct X-Y-Z plane
-              rotateY(rotation.x / 400);
+        var key = String.fromCharCode(e.keyCode | 32);
 
-              // Draw motion path
-              animation.drawPath(window);
+        if (key === 'r') {
+          startRecordingAtBegin = true;
+          return;
+        }
 
-              // Tick animation
-              animation.update(window);
+        if (e.keyCode === 32) {
+          animation.toggleVisiblePath();
+          e.preventDefault();
+          return;
+        }
+        animation.start(key);
+        //animation.moveTo([0,0,120], Quaternion.ONE, 1000, null);
+      };
+    };
 
-              // Draw the updated platform
-              platform.draw(window);
+    var draw = function () {
 
-              // Send to servos
-              // platform.getServoAngles();
+      background(255);
 
-              pop();
+      push();
 
-              if (recording) {
-                recorder.addFrame();
-              }
-            };
+      translate(50, -70, 200);
+      rotateX(Math.PI / 2 - rotation.y / 400); // Work in correct X-Y-Z plane
+      rotateY(rotation.x / 400);
 
-        </script>
+      // Draw motion path
+      animation.drawPath(window);
 
-        <a href="https://www.xarg.org/projects/"><img src="https://www.xarg.org/image/xarg-logo.png" alt="xarg open projects" /></a>
-    </body>
+      // Tick animation
+      animation.update(window);
+
+      // Draw the updated platform
+      platform.draw(window);
+
+      // Send to servos
+      // platform.getServoAngles();
+
+      pop();
+
+      if (recording) {
+        recorder.addFrame();
+      }
+    };
+
+  </script>
+
+</body>
+
 </html>

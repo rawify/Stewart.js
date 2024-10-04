@@ -1,171 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"><title>Stewart Platform</title>
+
+<head>
+  <meta charset="utf-8">
+  <title>Stewart Platform</title>
+</head>
+
+<body>
+
+  <script src="../node_modules/p5/lib/p5.min.js"></script>
+  <script src="../node_modules/quaternion/dist/quaternion.min.js"></script>
+  <script src="../dist/stewart.min.js"></script>
 
 
-    </head>
-    <body>
+  <div id="canvas" style="text-align: center"></div>
 
-        <script src ="../node_modules/p5/lib/p5.min.js"></script>
-        <script src ="../node_modules/quaternion/quaternion.min.js"></script>
-        <script src ="../stewart.js"></script>
+  <script>
+    var ball;
+    var platform;
 
+    function Ball(p) {
+      this.platform = p;
+      this.translation = [0, 0, 0];
+      this.dtranslation = [0, 0, 0];
+      this.ddtranslation = [0, 0, 0];
+      this.orientiation = Quaternion.ONE;
+    }
+    Ball.prototype = {
+      platform: null,
+      translation: null,
+      dtranslation: null,
+      ddtranslation: null,
+      orientiation: null,
+      x: 0,
+      y: 0,
+      z: 300,
+      mass: 2.7 / 1000, // kg
+      r: 20, // mm
+      dx: 0,
+      dy: 0,
+      dz: 0,
+      update: function () {
+        var plat = this.platform;
+        var zoff = plat.T0[2];
 
-        <div id="canvas" style="text-align: center"></div>
-
-        <script>
-            var ball;
-            var platform;
-
-            function Ball(p) {
-              this.platform = p;
-              this.translation = [0, 0, 0];
-              this.dtranslation = [0, 0, 0];
-              this.ddtranslation = [0, 0, 0];
-              this.orientiation = Quaternion.ONE;
-            }
-            Ball.prototype = {
-              platform: null,
-              translation: null,
-              dtranslation: null,
-              ddtranslation: null,
-              orientiation: null,
-              x: 0,
-              y: 0,
-              z: 300,
-              mass: 2.7 / 1000, // kg
-              r: 20, // mm
-              dx: 0,
-              dy: 0,
-              dz: 0,
-              update: function() {
-                var plat = this.platform;
-                var zoff = plat.T0[2];
-
-                var frameRate = 1 / 40; // Seconds
-                var g = -9.81;  // m / s^2
+        var frameRate = 1 / 40; // Seconds
+        var g = -9.81;  // m / s^2
 
 
-                if (this.z < 180 && this.dtranslation[2] === 0) {
-                  this.translation[2] = 0;
-                  this.dtranslation[2] = 0;
-                  this.ddtranslation[2] = 30;
-                }
+        if (this.z < 180 && this.dtranslation[2] === 0) {
+          this.translation[2] = 0;
+          this.dtranslation[2] = 0;
+          this.ddtranslation[2] = 30;
+        }
 
-                // Paddle
-                this.dtranslation[2] += this.ddtranslation[2] * frameRate;
-                this.translation[2] += this.dtranslation[2] * frameRate * 100;
+        // Paddle
+        this.dtranslation[2] += this.ddtranslation[2] * frameRate;
+        this.translation[2] += this.dtranslation[2] * frameRate * 100;
 
-                if (this.translation[2] > 30) {
-                  this.dtranslation[2] *= -0.9;
-                  this.ddtranslation[2] = 0;
-                } else if (this.translation[2] <= 0) {
-                  this.dtranslation[2] = 0;
-                  this.translation[2] = 0;
-                }
+        if (this.translation[2] > 30) {
+          this.dtranslation[2] *= -0.9;
+          this.ddtranslation[2] = 0;
+        } else if (this.translation[2] <= 0) {
+          this.dtranslation[2] = 0;
+          this.translation[2] = 0;
+        }
 
-                // Ball Acceleration
-                // var ax = Fx / this.mass;
-                //var az = g + (Fz / this.mass);
-                var az = g;
+        // Ball Acceleration
+        // var ax = Fx / this.mass;
+        //var az = g + (Fz / this.mass);
+        var az = g;
 
-                // Ball Integrate Acceleration
-                this.dz += az * frameRate;
+        // Ball Integrate Acceleration
+        this.dz += az * frameRate;
 
-                // Ball Integrate velocity
-                this.z += this.dz * frameRate * 100;
+        // Ball Integrate velocity
+        this.z += this.dz * frameRate * 100;
 
-                if (this.z <= this.translation[2] + zoff + this.r) {
-                  this.dz = -this.dz * 0.8 + this.dtranslation[2];
-                  this.z = this.translation[2] + zoff + this.r;
-                }
+        if (this.z <= this.translation[2] + zoff + this.r) {
+          this.dz = -this.dz * 0.8 + this.dtranslation[2];
+          this.z = this.translation[2] + zoff + this.r;
+        }
 
-                plat.update(this.translation, this.orientiation);
-              },
-              draw: function(p) {
-                p.push();
-                p.translate(this.x, this.y, this.z);
-                p.sphere(this.r);
-                p.pop();
-              }
-            };
+        plat.update(this.translation, this.orientiation);
+      },
+      draw: function (p) {
+        p.push();
+        p.translate(this.x, this.y, this.z);
+        p.sphere(this.r);
+        p.pop();
+      }
+    };
 
-            function setupPlatform() {
+    function setupPlatform() {
 
-              var rotation = {active: false, x: -15, y: -150, cx: 0, cy: 0};
+      var rotation = { active: false, x: -15, y: -150, cx: 0, cy: 0 };
 
-              var sketch = function(p) {
+      var sketch = function (p) {
 
-                p.setup = function() {
-                  p.createCanvas(600, 600, p.WEBGL);
+        p.setup = function () {
+          p.createCanvas(600, 600, p.WEBGL);
 
-                  p.camera(100.0, -290.0, (p.height / 2.0) / Math.tan(Math.PI / 6),
-                          0.0, 0.0, 0.0,
-                          0.0, 1.0, 0.0);
+          p.camera(100.0, -290.0, (p.height / 2.0) / Math.tan(Math.PI / 6),
+            0.0, 0.0, 0.0,
+            0.0, 1.0, 0.0);
 
-                  platform = new Stewart;
-                  platform.initHexagonal();
+          platform = new Stewart;
+          platform.initHexagonal();
 
-                  ball = new Ball(platform);
+          ball = new Ball(platform);
 
-                };
+        };
 
-                p.draw = function() {
+        p.draw = function () {
 
-                  p.background(255);
+          p.background(255);
 
-                  p.push();
+          p.push();
 
-                  p.translate(0, 100, 100);
-                  p.rotateX(Math.PI / 2 - rotation.y / 400); // Work in correct X-Y-Z plane
-                  p.rotateY(rotation.x / 400);
-
-
-                  ball.update();
-
-                  // Draw the updated platform
-                  platform.draw(p);
-
-                  ball.draw(p);
-
-                  // Send to servos
-                  // platform.getServoAngles();
-
-                  p.pop();
-
-                };
-              };
-              new p5(sketch, 'canvas');
-
-              document.getElementById("canvas").onmousedown = function(ev) {
-                rotation.cx = ev.pageX - rotation.x;
-                rotation.cy = ev.pageY - rotation.y;
-                rotation.active = true;
-              };
-              document.onmouseup = function() {
-                rotation.active = false;
-              };
-              document.onmousemove = function(ev) {
-                if (rotation.active) {
-                  rotation.x = ev.pageX - rotation.cx;
-                  rotation.y = ev.pageY - rotation.cy;
-                }
-
-              };
+          p.translate(0, 100, 100);
+          p.rotateX(Math.PI / 2 - rotation.y / 400); // Work in correct X-Y-Z plane
+          p.rotateY(rotation.x / 400);
 
 
+          ball.update();
 
+          // Draw the updated platform
+          platform.draw(p);
 
+          ball.draw(p);
+
+          // Send to servos
+          // platform.getServoAngles();
+
+          p.pop();
+
+        };
+      };
+      new p5(sketch, 'canvas');
+
+      document.getElementById("canvas").onmousedown = function (ev) {
+        rotation.cx = ev.pageX - rotation.x;
+        rotation.cy = ev.pageY - rotation.y;
+        rotation.active = true;
+      };
+      document.onmouseup = function () {
+        rotation.active = false;
+      };
+      document.onmousemove = function (ev) {
+        if (rotation.active) {
+          rotation.x = ev.pageX - rotation.cx;
+          rotation.y = ev.pageY - rotation.cy;
+        }
+
+      };
 
 
 
 
-            }
 
-            window.onload = setupPlatform;
-        </script>
 
-        <a href="https://raw.org/projects/"><img src="https://www.xarg.org/image/xarg-logo.png" alt="xarg open projects" /></a>
-    </body>
+
+
+    }
+
+    window.onload = setupPlatform;
+  </script>
+
+</body>
+
 </html>

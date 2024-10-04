@@ -13,9 +13,9 @@
 The code can run headless, but to set up all parameters properly, a visualization of the platform can help a lot. To do so, we use p5.js and quaternion.js
 
 ```js
-<script src="p5.js"></script>
-<script src="quaternion.js"></script>
-<script src="stewart.js"></script>
+<script src="p5.min.js"></script>
+<script src="quaternion.min.js"></script>
+<script src="stewart.min.js"></script>
 <script>
 var sketch = function(p) {
 
@@ -90,8 +90,6 @@ SVG paths are parsed and used for motion commads. This way SVG images can be plo
 
 The hand tracking device LeapMotion can be read via JavaScript using the leapjs package. The example uses the LeapMotion to use the hand position and orienttion as input for the platform.
 
-
-
 ## Options
 
 The platform visualization is meant to draw a platform in milimeter. When you work headless, the unit does not matter. The following options are available:
@@ -133,19 +131,24 @@ For a circular platform this indicates the radial distance of pairs of rod anker
 A boolean for hexagonal platforms to indicate if the platform shall look into the same direction as the base plate. Default=true
 
 
-
 ## Installation
 
-Installing Stewart is as easy as cloning this repo or use one of the following command:
+Installing Stewart.js is as easy as cloning this repo or use one of the following command:
 
 ```
 npm install stewart
 ```
 
+##Building the library
 
+After cloning the Git repository run:
 
+```
+npm install
+npm run build
+```
 
-Copyright and licensing
-===
-Copyright (c) 2023, [Robert Eisele](https://raw.org/)
+## Copyright and licensing
+
+Copyright (c) 2025, [Robert Eisele](https://raw.org/)
 Licensed under the MIT license.

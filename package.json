@@ -1,7 +1,7 @@
 {
     "name": "stewart",
-    "title": "stewart",
-    "version": "1.0.2",
+    "title": "Stewart",
+    "version": "1.1.0",
     "homepage": "https://raw.org/research/inverse-kinematics-of-a-stewart-platform/",
     "bugs": "https://github.com/rawify/Stewart.js/issues",
     "description": "A library to calculate the inverse kinematics of a Stewart Platform",
@@ -9,32 +9,54 @@
         "math",
         "stewart platform",
         "inverse",
+        "quaternion",
         "kinematics",
         "animation",
         "p5"
     ],
-    "author": "Robert Eisele <robert@raw.org> (http://raw.org/)",
-    "main": "stewart.js",
     "private": false,
+    "main": "./dist/stewart.js",
+    "module": "./dist/stewart.mjs",
+    "browser": "./dist/stewart.min.js",
+    "unpkg": "./dist/stewart.min.js",
     "readmeFilename": "README.md",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+    "exports": {
+        ".": {
+            "require": "./dist/stewart.js",
+            "import": "./dist/stewart.mjs"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:rawify/Stewart.js.git"
+    },
+    "funding": {
+        "type": "github",
+        "url": "https://github.com/sponsors/rawify"
+    },
+    "author": {
+        "name": "Robert Eisele",
+        "email": "robert@raw.org",
+        "url": "https://raw.org/"
+    },
+    "license": "MIT",
+    "engines": {
+        "node": "*"
     },
     "directories": {
         "example": "examples"
     },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/rawify/Stewart.js.git"
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "crude-build Stewart"
     },
-    "engines": {
-        "node": "*"
-    },
-    "license": "MIT",
     "dependencies": {
         "bezier-js": "^6.1.0",
         "leapjs": "^1.1.1",
         "p5": "^1.4.1",
         "quaternion": "^1.2.1"
+    },
+    "devDependencies": {
+        "crude-build": "^0.0.1"
     }
 }
