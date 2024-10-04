@@ -139,7 +139,7 @@ Installing Stewart.js is as easy as cloning this repo or use one of the followin
 npm install stewart
 ```
 
-##Building the library
+## Building the library
 
 After cloning the Git repository run:
 
