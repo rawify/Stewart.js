@@ -1,5 +1,5 @@
 /**
- * @license Stewart v1.1.0 10/4/2024
+ * @license Stewart v1.1.1 10/5/2024
  * https://raw.org/research/inverse-kinematics-of-a-stewart-platform/
  *
  * Copyright (c) 2024, Robert Eisele (https://raw.org/)

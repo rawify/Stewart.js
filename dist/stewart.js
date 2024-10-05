@@ -1225,8 +1225,7 @@ Stewart.prototype = {
 
 Stewart.Animation = Animation;
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = Stewart;
-module.exports = Stewart; 
+Object.defineProperty(Stewart, "__esModule", { 'value': true });
+Stewart['default'] = Stewart;
+Stewart['Stewart'] = Stewart;
+module['exports'] = Stewart;
