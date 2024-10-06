@@ -1225,5 +1225,5 @@ Stewart.prototype = {
 
 Stewart.Animation = Animation;
 export {
-  Stewart as default
+  Stewart as default, Stewart
 };
