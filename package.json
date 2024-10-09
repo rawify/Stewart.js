@@ -1,7 +1,7 @@
 {
     "name": "stewart",
     "title": "Stewart",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "homepage": "https://raw.org/research/inverse-kinematics-of-a-stewart-platform/",
     "bugs": "https://github.com/rawify/Stewart.js/issues",
     "description": "A library to calculate the inverse kinematics of a Stewart Platform",
@@ -54,9 +54,9 @@
         "bezier-js": "^6.1.4",
         "leapjs": "^1.1.1",
         "p5": "^1.11.0",
-        "quaternion": "^1.6.2"
+        "quaternion": "^1.6.5"
     },
     "devDependencies": {
-        "crude-build": "^0.0.4"
+        "crude-build": "^0.1.1"
     }
 }

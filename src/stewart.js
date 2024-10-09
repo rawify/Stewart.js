@@ -1,13 +1,13 @@
 /**
- * @license Stewart v1.1.2 10/6/2024
+ * @license Stewart v1.1.3 10/9/2024
  * https://raw.org/research/inverse-kinematics-of-a-stewart-platform/
  *
  * Copyright (c) 2024, Robert Eisele (https://raw.org/)
  * Licensed under the MIT license.
  **/
 
-/* import Quaternion from quaternion */
-/* import Bezier from bezier-js */
+import Quaternion from 'quaternion';
+import Bezier from 'bezier-js';
 /* !simple-compilation */
 
 function getHexPlate(r_i, r_o, rot) {

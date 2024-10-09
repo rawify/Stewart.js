@@ -3,7 +3,6 @@ const Quaternion = require('quaternion');
 const Bezier = require('bezier-js');
 
 
-
 /* !simple-compilation */
 
 function getHexPlate(r_i, r_o, rot) {

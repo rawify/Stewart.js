@@ -3,7 +3,6 @@ import Quaternion from 'quaternion';
 import Bezier from 'bezier-js';
 
 
-
 /* !simple-compilation */
 
 function getHexPlate(r_i, r_o, rot) {
