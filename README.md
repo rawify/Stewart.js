@@ -8,14 +8,14 @@
 
 ## Visualization
 
-![Stewart-Platform](https://github.com/rawify/Stewart.js/blob/main/res/stewart-platform.png?raw=true "Stewart Platform Visualization")
+![Stewart-Platform](res/stewart-platform.png "Stewart Platform Visualization")
 
 The code can run headless, but to set up all parameters properly, a visualization of the platform can help a lot. To do so, we use p5.js and quaternion.js
 
 ```js
-<script src="p5.min.js"></script>
-<script src="quaternion.min.js"></script>
-<script src="stewart.min.js"></script>
+<script src="path/to/p5.min.js"></script>
+<script src="path/to/quaternion.min.js"></script>
+<script src="path/to/stewart.min.js"></script>
 <script>
 var sketch = function(p) {
 
@@ -133,10 +133,48 @@ A boolean for hexagonal platforms to indicate if the platform shall look into th
 
 ## Installation
 
-Installing Stewart.js is as easy as cloning this repo or use one of the following command:
+You can install `Stewart.js` via npm:
 
-```
+```bash
 npm install stewart
+```
+
+Or with yarn:
+
+```bash
+yarn add stewart
+```
+
+Alternatively, download or clone the repository:
+
+```bash
+git clone https://github.com/rawify/Stewart.js
+```
+
+## Usage
+
+Include the `stewart.min.js` file in your project:
+
+```html
+<script src="path/to/p5.min.js"></script>
+<script src="path/to/quaternion.min.js"></script>
+<script src="path/to/stewart.min.js"></script>
+<script>
+  const stewart = new Stewart();
+  ...
+</script>
+```
+
+Or in a Node.js project:
+
+```javascript
+const Stewart = require('stewart');
+```
+
+or
+
+```javascript
+import Stewart from "stewart";
 ```
 
 ## Building the library
